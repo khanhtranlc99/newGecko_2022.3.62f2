@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d510d7c09dba4daf348a34f1eef1f, type: 3}
+  m_Name: CameraSettings
+  m_EditorClassIdentifier: 
+  levelList:
+  - level: 1
+    fov: 15
+  - level: 2
+    fov: 20
+  - level: 3
+    fov: 20
+  - level: 4
+    fov: 25
+  - level: 5
+    fov: 25
+  - level: 6
+    fov: 15
+  - level: 7
+    fov: 30
+  - level: 8
+    fov: 25
+  - level: 9
+    fov: 30
+  - level: 10
+    fov: 30
+  - level: 11
+    fov: 35
+  - level: 12
+    fov: 30
+  - level: 13
+    fov: 45
+  - level: 14
+    fov: 40
+  - level: 15
+    fov: 60
+  - level: 16
+    fov: 40
+  - level: 17
+    fov: 45
+  - level: 18
+    fov: 30
+  - level: 19
+    fov: 45
+  - level: 20
+    fov: 45
+  - level: 21
+    fov: 30
+  - level: 22
+    fov: 30
+  - level: 23
+    fov: 30
+  - level: 24
+    fov: 25
+  - level: 25
+    fov: 30
+  - level: 26
+    fov: 30
+  - level: 27
+    fov: 25
+  - level: 28
+    fov: 25
+  - level: 29
+    fov: 40
+  - level: 30
+    fov: 35
+  - level: 31
+    fov: 25
+  - level: 32
+    fov: 20
+  - level: 33
+    fov: 25
+  - level: 34
+    fov: 15
+  - level: 35
+    fov: 50
+  - level: 36
+    fov: 35
+  - level: 37
+    fov: 50
+  - level: 38
+    fov: 65
+  - level: 40
+    fov: 50
+  - level: 47
+    fov: 65
+  - level: 49
+    fov: 70
+  - level: 50
+    fov: 35
+  - level: 52
+    fov: 70
+  - level: 60
+    fov: 40
+  - level: 63
+    fov: 40
+  - level: 64
+    fov: 40
+  - level: 66
+    fov: 40
+  - level: 67
+    fov: 55
+  - level: 0
+    fov: 0
+  - level: 70
+    fov: 40
+  - level: 71
+    fov: 40
+  - level: 72
+    fov: 40
+  - level: 73
+    fov: 70
+  - level: 75
+    fov: 40
+  - level: 77
+    fov: 40
+  - level: 80
+    fov: 40
+  - level: 81
+    fov: 70
+  - level: 82
+    fov: 65
+  - level: 84
+    fov: 40
+  - level: 86
+    fov: 50
+  - level: 87
+    fov: 40
+  - level: 89
+    fov: 40
+  - level: 94
+    fov: 40
+  - level: 95
+    fov: 40
+  - level: 98
+    fov: 40
+  - level: 99
+    fov: 80
+  - level: 103
+    fov: 80
+  - level: 110
+    fov: 65
+  - level: 117
+    fov: 70
+  - level: 118
+    fov: 100
+  - level: 123
+    fov: 70
+  - level: 136
+    fov: 70
+  - level: 139
+    fov: 90
+  - level: 144
+    fov: 70
+  - level: 149
+    fov: 70

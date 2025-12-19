@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
+  <string name="gcm_defaultSenderId" translatable="false">1049066334619</string>
+  <string name="google_storage_bucket" translatable="false">artstorenew-fef00.firebasestorage.app</string>
+  <string name="project_id" translatable="false">artstorenew-fef00</string>
+  <string name="google_api_key" translatable="false">AIzaSyATXO6GERPW2O02d4Cly-mm83O-3yHUnUA</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyATXO6GERPW2O02d4Cly-mm83O-3yHUnUA</string>
+  <string name="google_app_id" translatable="false">1:1049066334619:android:68c6b2e8d275ec7dd7193e</string>
+</resources>

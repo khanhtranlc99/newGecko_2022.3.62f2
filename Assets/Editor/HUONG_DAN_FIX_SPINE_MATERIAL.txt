@@ -1,0 +1,130 @@
+╔═══════════════════════════════════════════════════════════════╗
+║   HƯỚNG DẪN FIX LỖI SPINE MATERIAL KHI LOAD TỪ ASSETBUNDLE    ║
+╚═══════════════════════════════════════════════════════════════╝
+
+📋 MÔ TẢ VẤN ĐỀ:
+-----------------
+Khi load LevelData từ AssetBundle, SkeletonGraphic (anim) bị mất material
+→ Hiển thị màu tím (magenta) 
+→ Shader bị missing hoặc reference bị mất
+
+
+✅ GIẢI PHÁP - THỰC HIỆN THEO THỨ TỰ:
+-------------------------------------
+
+BƯỚC 1: Setup ShaderReferences Asset
+------------------------------------
+1. Trong Unity Editor, click menu: 
+   Tools > Shader > Setup ShaderReferences Asset
+
+2. Kiểm tra file: Assets/Resources/ShaderReferences.asset
+   → Phải có ít nhất 1 Spine shader trong danh sách
+   
+3. Nếu cần, bạn có thể thêm shader/material thủ công:
+   - Chọn ShaderReferences.asset trong Project
+   - Trong Inspector, kéo thả shader/material vào list
+
+
+BƯỚC 2: Thêm Shader vào Always Included Shaders
+------------------------------------------------
+1. Click menu: 
+   Tools > Spine > Add Shaders to Always Included Shaders
+
+2. Hoặc thủ công:
+   - Mở: Edit > Project Settings > Graphics
+   - Scroll xuống "Always Included Shaders"
+   - Click [+] và thêm shader:
+     Assets/Spine/Runtime/spine-unity/Shaders/SkeletonGraphic/Spine-SkeletonGraphic.shader
+
+
+BƯỚC 3: Rebuild AssetBundle
+----------------------------
+1. Xóa AssetBundle cũ trong thư mục build
+2. Build lại AssetBundle với LevelData
+
+
+BƯỚC 4: Test
+-------------
+1. Chạy game và load AssetBundle
+2. Kiểm tra Console log:
+   ✓ [ShaderManager] Load từ ShaderReferences: ...
+   ✓ [LevelData] Đã tạo và gán material mới với shader: ...
+   ✓ [LevelData] Đã rebuild SkeletonGraphic
+
+3. Nếu vẫn lỗi, kiểm tra log để xem bước nào fail
+
+
+🔍 DEBUG TOOLS:
+---------------
+1. In thông tin ShaderReferences:
+   Tools > Shader > Print ShaderReferences Info
+
+2. Liệt kê tất cả Spine shaders:
+   Tools > Spine > List All Spine Shaders
+
+
+📝 LƯU Ý QUAN TRỌNG:
+--------------------
+✓ ShaderReferences.asset PHẢI nằm trong thư mục Resources
+✓ Shader PHẢI được thêm vào Always Included Shaders trước khi build
+✓ Sau khi thay đổi, PHẢI rebuild AssetBundle
+✓ ShaderManager sẽ tự động khởi tạo khi game chạy
+
+
+🛠️ CÁC FILE LIÊN QUAN:
+-----------------------
+- Assets/Resources/ShaderReferences.asset          (Asset chứa shader references)
+- Assets/Base/00_BaseCode/Scripts/ShaderReferences.cs   (ScriptableObject)
+- Assets/ArtPuzzleFood/Script/Controllers/GamePlayController/ShaderManager.cs
+- Assets/ArtPuzzleFood/Script/Controllers/GamePlayController/LevelData.cs
+- Assets/Editor/SpineShaderIncluder.cs             (Auto add to build)
+- Assets/Editor/ShaderReferencesEditor.cs          (Setup tool)
+
+
+🔧 CÁCH HOẠT ĐỘNG:
+------------------
+1. ShaderManager khởi tạo và load ShaderReferences từ Resources
+2. Khi LevelData.Init() được gọi, FixSpineMaterial() tự động chạy
+3. FixSpineMaterial() lấy shader từ ShaderManager
+4. Tạo material mới với shader đúng
+5. Gán cho SkeletonGraphic và rebuild
+
+
+❓ TROUBLESHOOTING:
+-------------------
+Q: Vẫn bị màu tím sau khi làm theo hướng dẫn?
+A: 1. Kiểm tra Console log xem shader có được load không
+   2. Verify ShaderReferences.asset có shader trong list
+   3. Rebuild AssetBundle (quan trọng!)
+   4. Xóa cache AssetBundle cũ
+
+Q: Console báo "Không tìm thấy shader"?
+A: 1. Chạy lại Tools > Shader > Setup ShaderReferences Asset
+   2. Chạy Tools > Spine > Add Shaders to Always Included Shaders
+   3. Kiểm tra shader có tồn tại trong project không
+
+Q: Material vẫn NULL?
+A: 1. Kiểm tra anim (SkeletonGraphic) có NULL không
+   2. Kiểm tra ShaderManager.Instance có khởi tạo chưa
+   3. Đảm bảo Init() được gọi sau khi load AssetBundle
+
+
+💡 TIPS:
+--------
+- Nên setup ShaderReferences ngay từ đầu dự án
+- Thêm ShaderManager vào scene khởi động (hoặc để nó tự tạo)
+- Kiểm tra log mỗi lần load AssetBundle để phát hiện lỗi sớm
+- Backup AssetBundle trước khi rebuild
+
+
+📞 HỖ TRỢ:
+----------
+Nếu vẫn gặp vấn đề, kiểm tra:
+1. Unity Console Log (có log chi tiết)
+2. ShaderReferences.asset có đúng shader không
+3. Always Included Shaders trong Project Settings > Graphics
+
+═══════════════════════════════════════════════════════════════
+Created: 2025
+Last Updated: 2025-09-30
+═══════════════════════════════════════════════════════════════

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1049066334619",
+    "project_id": "artstorenew-fef00",
+    "storage_bucket": "artstorenew-fef00.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049066334619:android:68c6b2e8d275ec7dd7193e",
+        "android_client_info": {
+          "package_name": "com.abi.magic.store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATXO6GERPW2O02d4Cly-mm83O-3yHUnUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
