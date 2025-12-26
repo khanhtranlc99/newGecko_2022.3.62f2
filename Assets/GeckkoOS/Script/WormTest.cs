@@ -1,14 +1,15 @@
-using UnityEngine;
-using System.Collections.Generic;
 using Dreamteck.Splines;
+using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using System.Collections;
-using JetBrains.Annotations;
+using System.Collections.Generic;
+using UnityEngine;
 public class WormTest : MonoBehaviour
 {
    public SplineComputer spline;
    public List<GameObject> wormsPost;
-      public GameObject head; 
+    private SplinePoint[] bufferFrom;
+    public GameObject head; 
     public GameObject trail;
     public GameObject leg;
     [SerializeField] float bodyRadius = 0.25f;   // bán kính thân sâu
@@ -17,65 +18,58 @@ public class WormTest : MonoBehaviour
 
     public List<Material> lsMaterials;
     
-    [Button("Spawn Single")]
+    [Button]
    public void Spawn()
    {
 
 
-      SplineComputer spline = GetComponent<SplineComputer>();
-      spline.space = SplineComputer.Space.World;
+        SplineComputer spline = GetComponent<SplineComputer>();
+        //spline.space = SplineComputer.Space.Local;
 
 
-        int count = wormsPost.Count;
-        SplinePoint[] pts = new SplinePoint[count];
+        //int count = wormsPost.Count;
+        //SplinePoint[] pts = new SplinePoint[count];
 
-        for (int i = 0; i < count; i++)
-        {
-            Vector3 cell = wormsPost[i].transform.position;
+        //for (int i = 0; i < count; i++)
+        //{
+        //    Vector3 cell = wormsPost[i].transform.position;
 
-            // Vector3 worldPos = originWorld + ((Vector3)cell - gridCenter) * cellSize;
+        //    // Vector3 worldPos = originWorld + ((Vector3)cell - gridCenter) * cellSize;
 
-            SplinePoint p = new SplinePoint();
-            p.position = cell;
-            p.size = 1f;
-            p.color = Color.white;
-      
-            pts[i] = p;
-        }
+        //    SplinePoint p = new SplinePoint();
+        //    p.position = cell;
+        //    p.size = 1f;
+        //    p.color = Color.white;
 
-        spline.SetPoints(pts, SplineComputer.Space.World);
+        //    pts[i] = p;
+        //}
 
-        spline.RebuildImmediate();
-        
-        // FIX: Rebuild SplineMesh sau khi SplineComputer đã có points mới
-        var splineMesh = GetComponent<Dreamteck.Splines.SplineMesh>();
-        if (splineMesh != null)
-        {
-            splineMesh.RebuildImmediate();
-        }
+        //spline.SetPoints(pts, SplineComputer.Space.Local);
 
+        //spline.RebuildImmediate();
 
+        //// FIX: Rebuild SplineMesh sau khi SplineComputer đã có points mới
+        //var splineMesh = GetComponent<Dreamteck.Splines.SplineMesh>();
+        //if (splineMesh != null)
+        //{
+        //    splineMesh.RebuildImmediate();
+        //}
+
+        bufferFrom = spline.GetPoints(SplineComputer.Space.Local);
         var tempHead = Instantiate(head);
-        tempHead.transform.position = wormsPost[0].transform.position;  
+        tempHead.transform.position = bufferFrom[0].position;
         tempHead.transform.parent = this.transform;
         // Xoay đầu theo hướng từ point 0 đến point 1
-        if (wormsPost.Count > 1)
-        {
-            Vector3 headDirection = wormsPost[0].transform.position - wormsPost[1].transform.position;
-            if (headDirection.sqrMagnitude > 0.0001f)
-            {
-                tempHead.transform.rotation = Quaternion.LookRotation(headDirection.normalized);
-            }
-        }
+        
 
         var tempTrail = Instantiate(trail);
-        tempTrail.transform.position = wormsPost[wormsPost.Count - 1].transform.position;
-                  tempTrail.transform.parent = this.transform;
+        tempTrail.transform.position = bufferFrom[bufferFrom.Length - 1].position;
+        tempTrail.transform.parent = this.transform;
         // Xoay đuôi theo hướng từ point gần cuối về point cuối (ngược lại để mặt rỗng quay vào trong)
-        if (wormsPost.Count > 1)
+        if (bufferFrom.Length > 1)
         {
-            int lastIndex = wormsPost.Count - 1;
-            Vector3 trailDirection = wormsPost[lastIndex - 1].transform.position - wormsPost[lastIndex].transform.position;
+            int lastIndex = bufferFrom.Length - 1;
+            Vector3 trailDirection = bufferFrom[lastIndex - 1].position - bufferFrom[lastIndex].position;
             if (trailDirection.sqrMagnitude > 0.0001f)
             {
                 tempTrail.transform.rotation = Quaternion.LookRotation(trailDirection.normalized);
@@ -95,26 +89,18 @@ public class WormTest : MonoBehaviour
         // Frame của spline
         Vector3 tangentF = -sFront.forward;       // hướng “đầu → đuôi” của worm
         Vector3 upF = sFront.up.normalized;
-        Vector3 rightF = sFront.right.normalized;   // nếu Dreamteck có sFront.right, dùng luôn
 
         Vector3 tangentB = -sBack.forward;
         Vector3 upB = sBack.up.normalized;
-        Vector3 rightB = sBack.right.normalized;
 
-        // Vị trí ở mép thân (bên phải thân)
-        Vector3 sideOffsetF = rightF * bodyRadius;
-        Vector3 sideOffsetB = rightB * bodyRadius;
-
-        // chỉnh lên/xuống giữa thân nếu pivot chân bị lệch
-        Vector3 heightOffF = upF * heightOffset;
-        Vector3 heightOffB = upB * heightOffset;
-
-        Vector3 frontPos = sFront.position + sideOffsetF + heightOffF;
-        Vector3 backPos = sBack.position + sideOffsetB + heightOffB;
+        Vector3 frontPos = sFront.position;
+        Vector3 backPos = sBack.position;
 
         // Local +Z của leg sẽ // với dirFront / dirBack
         Quaternion baseRotFront = Quaternion.LookRotation(tangentF, upF);
         Quaternion baseRotBack = Quaternion.LookRotation(tangentB, upB);
+        tempHead.transform.rotation = Quaternion.LookRotation(tangentF, upF);
+            
 
         // offset thêm để chỉnh cho đúng hướng chân (set trong inspector)
         Quaternion legRotOffset = Quaternion.Euler(legEulerOffset);
@@ -125,22 +111,22 @@ public class WormTest : MonoBehaviour
         // Spawn
         var legFront = Instantiate(leg, frontPos, rotFront, this.transform);
         var legBack = Instantiate(leg, backPos, rotBack, this.transform);
-        
+
 
         var material = lsMaterials[Random.Range(0, lsMaterials.Count)];
-      this.GetComponent<Renderer>().sharedMaterial = material;
+        this.GetComponent<Renderer>().sharedMaterial = material;
 
         // Gán material cho trail
         tempHead.GetComponentInChildren<Renderer>().sharedMaterial = material;
-      tempTrail.GetComponentInChildren<Renderer>().sharedMaterial = material;
+        tempTrail.GetComponentInChildren<Renderer>().sharedMaterial = material;
         legFront.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = material;
         legBack.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = material;
 
         this.GetComponent<WormController>().head = tempHead.transform;
-    this.GetComponent<WormController>().tail = tempTrail.transform;
-    this.GetComponent<WormController>().root = this.transform;
-    this.GetComponent<WormController>().frontLeg = legFront.transform;
-    this.GetComponent<WormController>().backLeg = legBack.transform;
+        this.GetComponent<WormController>().tail = tempTrail.transform;
+        this.GetComponent<WormController>().root = this.transform;
+        this.GetComponent<WormController>().frontLeg = legFront.transform;
+        this.GetComponent<WormController>().backLeg = legBack.transform;
         // Tự động thêm MeshCollider nếu chưa có
         if (GetComponent<MeshCollider>() == null)
         {
@@ -152,193 +138,40 @@ public class WormTest : MonoBehaviour
                 meshCollider.sharedMesh = meshFilter.sharedMesh;
             }
         }
-       
+
     }
 
-    [Button("Spawn Batch (Optimized)")]
-    public void SpawnBatch()
+#if UNITY_EDITOR
+    private void OnValidate()
     {
-        // Tối ưu: Setup trước khi spawn
-        SplineComputer spline = GetComponent<SplineComputer>();
-        spline.space = SplineComputer.Space.World;
-        
-        // Tắt rebuild on awake tạm thời để tránh rebuild không cần thiết
-        var splineMesh = GetComponent<Dreamteck.Splines.SplineMesh>();
-        bool originalBuildOnAwake = false;
-        if (splineMesh != null)
+        if (!spline) spline = GetComponent<SplineComputer>();
+        wormsPost = new List<GameObject>();
+        var allTransforms = transform.GetComponentsInChildren<Transform>();
+        for (int i = 1; i < allTransforms.Length; i++) // Bỏ qua phần tử đầu tiên (chính nó)
         {
-            originalBuildOnAwake = splineMesh.buildOnAwake;
-            splineMesh.buildOnAwake = false; // Tắt tạm thời
+            wormsPost.Add(allTransforms[i].gameObject);
         }
-        
-        // Setup spline points
-        int count = wormsPost.Count;
-        SplinePoint[] pts = new SplinePoint[count];
-        
-        for (int i = 0; i < count; i++)
-        {
-            Vector3 cell = wormsPost[i].transform.position;
-            SplinePoint p = new SplinePoint();
-            p.position = cell;
-            p.size = 1f;
-            p.color = Color.white;
-            
-            // Tính normal
-            if (count >= 3)
-            {
-                Vector3 side1, side2;
-                if (i == 0)
-                {
-                    side1 = cell - wormsPost[1].transform.position;
-                    side2 = cell - wormsPost[2].transform.position;
-                }
-                else if (i == count - 1)
-                {
-                    side1 = cell - wormsPost[count - 2].transform.position;
-                    side2 = cell - wormsPost[count - 3].transform.position;
-                }
-                else
-                {
-                    side1 = cell - wormsPost[i + 1].transform.position;
-                    side2 = cell - wormsPost[i - 1].transform.position;
-                }
-                
-                Vector3 normal = Vector3.Cross(side1.normalized, side2.normalized).normalized;
-                if (normal.sqrMagnitude < 0.0001f)
-                {
-                    normal = Vector3.up;
-                }
-                p.normal = normal;
-            }
-            else
-            {
-                p.normal = Vector3.up;
-            }
-            
-            pts[i] = p;
-        }
-        
-        spline.SetPoints(pts, SplineComputer.Space.World);
-        spline.RebuildImmediate();
-        
-        // Rebuild SplineMesh
-        if (splineMesh != null)
-        {
-            splineMesh.RebuildImmediate();
-        }
-        
-        // Setup head, trail, legs (giống Spawn() nhưng tối ưu hơn)
-        var tempHead = Instantiate(head);
-        tempHead.transform.position = wormsPost[0].transform.position;
-        tempHead.transform.parent = this.transform;
-        if (wormsPost.Count > 1)
-        {
-            Vector3 headDirection = wormsPost[0].transform.position - wormsPost[1].transform.position;
-            if (headDirection.sqrMagnitude > 0.0001f)
-            {
-                tempHead.transform.rotation = Quaternion.LookRotation(headDirection.normalized);
-            }
-        }
-        
-        var tempTrail = Instantiate(trail);
-        tempTrail.transform.position = wormsPost[wormsPost.Count - 1].transform.position;
-        tempTrail.transform.parent = this.transform;
-        if (wormsPost.Count > 1)
-        {
-            int lastIndex = wormsPost.Count - 1;
-            Vector3 trailDirection = wormsPost[lastIndex - 1].transform.position - wormsPost[lastIndex].transform.position;
-            if (trailDirection.sqrMagnitude > 0.0001f)
-            {
-                tempTrail.transform.rotation = Quaternion.LookRotation(trailDirection.normalized);
-            }
-        }
-        
-        double t0 = spline.GetPointPercent(0);
-        double t1 = spline.GetPointPercent(1);
-        double tFront = t0;
-        double tBack = t1;
-        
-        SplineSample sFront = spline.Evaluate(tFront);
-        SplineSample sBack = spline.Evaluate(tBack);
-        
-        Vector3 tangentF = -sFront.forward;
-        Vector3 upF = sFront.up.normalized;
-        Vector3 rightF = sFront.right.normalized;
-        
-        Vector3 tangentB = -sBack.forward;
-        Vector3 upB = sBack.up.normalized;
-        Vector3 rightB = sBack.right.normalized;
-        
-        Vector3 sideOffsetF = rightF * bodyRadius;
-        Vector3 sideOffsetB = rightB * bodyRadius;
-        Vector3 heightOffF = upF * heightOffset;
-        Vector3 heightOffB = upB * heightOffset;
-        
-        Vector3 frontPos = sFront.position + sideOffsetF + heightOffF;
-        Vector3 backPos = sBack.position + sideOffsetB + heightOffB;
-        
-        Quaternion baseRotFront = Quaternion.LookRotation(tangentF, upF);
-        Quaternion baseRotBack = Quaternion.LookRotation(tangentB, upB);
-        Quaternion legRotOffset = Quaternion.Euler(legEulerOffset);
-        Quaternion rotFront = baseRotFront * legRotOffset;
-        Quaternion rotBack = baseRotBack * legRotOffset;
-        
-        var legFront = Instantiate(leg, frontPos, rotFront, this.transform);
-        var legBack = Instantiate(leg, backPos, rotBack, this.transform);
-        
-        var material = lsMaterials[Random.Range(0, lsMaterials.Count)];
-        this.GetComponent<Renderer>().sharedMaterial = material;
-        tempHead.GetComponentInChildren<Renderer>().sharedMaterial = material;
-        tempTrail.GetComponentInChildren<Renderer>().sharedMaterial = material;
-        legFront.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = material;
-        legBack.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = material;
-        
-        this.GetComponent<WormController>().head = tempHead.transform;
-        this.GetComponent<WormController>().tail = tempTrail.transform;
-        this.GetComponent<WormController>().root = this.transform;
-        this.GetComponent<WormController>().frontLeg = legFront.transform;
-        this.GetComponent<WormController>().backLeg = legBack.transform;
-        
-        // Defer MeshCollider update - chỉ update sau khi spawn xong
-        var meshCollider = GetComponent<MeshCollider>();
-        if (meshCollider == null)
-        {
-            meshCollider = gameObject.AddComponent<MeshCollider>();
-        }
-        // Tạm thời disable collider để tránh update nặng
-        meshCollider.enabled = false;
-        
-        // Khôi phục buildOnAwake
-        if (splineMesh != null)
-        {
-            splineMesh.buildOnAwake = originalBuildOnAwake;
-        }
-        
-        // Update collider sau 1 frame (dùng coroutine)
-        StartCoroutine(UpdateColliderDelayed(meshCollider));
     }
-    
-    private IEnumerator UpdateColliderDelayed(MeshCollider meshCollider)
-    {
-        yield return null; // Đợi 1 frame
-        MeshFilter meshFilter = GetComponent<MeshFilter>();
-        if (meshFilter != null && meshFilter.sharedMesh != null)
-        {
-            meshCollider.sharedMesh = meshFilter.sharedMesh;
-        }
-        meshCollider.enabled = true;
-    }
+#endif
 
     [Button]
-   public void Move()
+   public void Delete()
    {
-        
+        for(int i = wormsPost.Count - 1; i >= 0; i--)
+        {
+            var obj = wormsPost[i];
+            if (obj != null)
+            {
+                DestroyImmediate(obj);
+            }
+            wormsPost.Remove(obj);
+        }
 
 
 
 
 
-   }
+    }
 
     //  IEnumerator MoveOneStep(System.Action onDone = null)
     // {

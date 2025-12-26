@@ -67,7 +67,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3745016564803616709
 Animator:
-  serializedVersion: 7
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -81,7 +81,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -143,8 +142,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340348256069850073}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -6.5, y: 6, z: 4.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -226,7 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4419569713809335839}
   - component: {fileID: 2185938794160390337}
-  - component: {fileID: 7474064642780096248}
+  - component: {fileID: 860407476707510029}
   m_Layer: 0
   m_Name: leg
   m_TagString: Untagged
@@ -266,13 +265,10 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2446745539557716149, guid: 400996ef3f6db634290265eacd6973f6, type: 3}
+  - {fileID: 2100000, guid: 9116805142b20814faab4934153ff866, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -315,8 +311,8 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.005662782, y: 0.015013114, z: 0.088352636}
     m_Extent: {x: 0.054672256, y: 0.15788116, z: 0.1255567}
   m_DirtyAABB: 0
---- !u!64 &7474064642780096248
-MeshCollider:
+--- !u!65 &860407476707510029
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -333,10 +329,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5978718778493925260, guid: 400996ef3f6db634290265eacd6973f6, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 1.610891, y: 0.3153962, z: 0.68740547}
+  m_Center: {x: -0.0036124582, y: 0.120482355, z: -0.0041646957}
 --- !u!1 &2758668821250486204
 GameObject:
   m_ObjectHideFlags: 0

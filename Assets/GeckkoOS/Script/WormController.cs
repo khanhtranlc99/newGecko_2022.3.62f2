@@ -12,6 +12,7 @@ public class WormController : MonoBehaviour
     public Transform tail;
     public Transform frontLeg;  
     public Transform backLeg;
+    public Mesh meshBody;
     private Material currentMaterial;
 
     [Header("Move Settings")]
@@ -92,14 +93,19 @@ public class WormController : MonoBehaviour
 
         EnsureBuffers(n);
 
+        
+        this.GetComponent<SplineMesh>().autoUpdate = false;
+        this.GetComponent<SplineMesh>().GetChannel(0).AddMesh(meshBody);
+        if(spline.GetPoints(SplineComputer.Space.Local).Length>8) this.GetComponent<SplineMesh>().GetChannel(0).count = 9;
+        else this.GetComponent<SplineMesh>().GetChannel(0).count = 5;
+        spline.RebuildImmediate();
+        this.GetComponent<WormTest>().Spawn();
+
         headRenderer = head ? head.GetComponentInChildren<Renderer>(true) : null;
         faceAnim = head ? head.GetComponentInChildren<FaceAnimation>(true) : null;
         frontLegAnim = frontLeg ? frontLeg.GetComponentInChildren<Animator>(true) : null;
         backLegAnim = backLeg ? backLeg.GetComponentInChildren<Animator>(true) : null;
-
         currentMaterial = headRenderer ? headRenderer.sharedMaterial : null;
-        spline.SetPoints(statePoints, SplineComputer.Space.Local);
-        this.GetComponent<SplineMesh>().autoUpdate = false;
         //SyncEndsToSpline();
         faceAnim.StartAnim();
     }
@@ -860,5 +866,13 @@ public class WormController : MonoBehaviour
             Debug.Log($"Point {i}: normal={normal}, tangent={tangent}, dot={dot:F3}, angle={angle:F1}°");
         }
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (!spline) spline = GetComponent<SplineComputer>();
+        if (!root) root = this.transform;
+    }
+#endif
 }
 

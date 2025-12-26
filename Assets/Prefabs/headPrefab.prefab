@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119754306475472390}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -4.5, y: 4, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6333942932934631304}
   - component: {fileID: 1901054713142435953}
   - component: {fileID: 753249530086330390}
-  - component: {fileID: 4953818701374499107}
+  - component: {fileID: 5905325837684275837}
   m_Layer: 0
   m_Name: untitled 3
   m_TagString: Untagged
@@ -83,13 +83,10 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3462685513357979134, guid: 2ce766a3397133447807ed9c3e62fe03, type: 3}
+  - {fileID: 2100000, guid: 9116805142b20814faab4934153ff866, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,7 +114,7 @@ SkinnedMeshRenderer:
   m_Mesh: {fileID: -7070831255929112694, guid: 2ce766a3397133447807ed9c3e62fe03, type: 3}
   m_Bones: []
   m_BlendShapeWeights:
-  - 100
+  - 0
   - 0
   m_RootBone: {fileID: 0}
   m_AABB:
@@ -145,8 +142,8 @@ MonoBehaviour:
   smr: {fileID: 1901054713142435953}
   idxTongue: 0
   idxBlink: 1
---- !u!64 &4953818701374499107
-MeshCollider:
+--- !u!136 &5905325837684275837
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -163,7 +160,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7070831255929112694, guid: 2ce766a3397133447807ed9c3e62fe03, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.33948714
+  m_Height: 0.7489983
+  m_Direction: 1
+  m_Center: {x: 0.000000028934295, y: 0.0030251609, z: 0.10783531}

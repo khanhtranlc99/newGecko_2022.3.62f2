@@ -187,9 +187,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials: []
@@ -228,7 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateMethod: 0
   _spline: {fileID: 8500973758664858545}
-  _autoUpdate: 1
+  _autoUpdate: 0
   _rotationModifier:
     blend: 1
     useClippedPercent: 0
@@ -265,7 +262,7 @@ MonoBehaviour:
   animClipFrom: 0
   animClipTo: 1
   multithreaded: 0
-  buildOnAwake: 1
+  buildOnAwake: 0
   buildOnEnable: 0
   _baked: 0
   _markDynamic: 1
@@ -1296,11 +1293,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spline: {fileID: 8500973758664858545}
-  root: {fileID: 0}
+  root: {fileID: 168237267878470458}
   head: {fileID: 0}
   tail: {fileID: 0}
   frontLeg: {fileID: 0}
   backLeg: {fileID: 0}
+  meshBody: {fileID: 0}
   cellSize: 1
   stepDuration: 0.15
   loopMove: 0
@@ -1310,6 +1308,10 @@ MonoBehaviour:
   legMidT: 0.5
   legSinkDistance: 0.1
   debugLog: 0
+  checkMeshTwist: 0
+  twistThreshold: 45
+  drawNormals: 0
+  normalDrawLength: 0.5
   autoMove: 0
   headCheckRadius: 0.01
 --- !u!114 &2949387133050088862
@@ -1338,5 +1340,3 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 9116805142b20814faab4934153ff866, type: 2}
   - {fileID: 2100000, guid: 1661c42dd0c116f4f94e78cb9a93ea7b, type: 2}
   - {fileID: 2100000, guid: b100cd91c4d33154295327d5ee9d9e14, type: 2}
-  batchSize: 10
-  useBatchSpawn: 1
