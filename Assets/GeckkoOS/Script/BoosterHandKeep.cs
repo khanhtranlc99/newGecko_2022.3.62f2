@@ -156,10 +156,10 @@ public class BoosterHandKeep : MonoBehaviour
                        if(currentWorm == null)
                        {
                         currentWorm = hitCollider.gameObject;
-                             hand.transform.DOMove(hit.point, 0.1f).OnComplete(() => {
+                             hand.transform.DOMove(hit.point, 0.5f).OnComplete(() => {
                         
                                hitCollider.gameObject.transform.parent = hand.transform;
-                               hand.transform.DOMove(handPos.position, 0.1f).OnComplete(() => {
+                               hand.transform.DOMove(handPos.position, 0.5f).OnComplete(() => {
                                 wasUseTNT_Booster = false;
                                 hand.SetActive(false);
                                 Destroy(currentWorm.gameObject);
