@@ -49,12 +49,24 @@ public class TutGamePlay_Step_2 : TutorialBase
     {
         centerPosition = transform.position;
         
+        if (GamePlayController.Instance != null && 
+            GamePlayController.Instance.playerContain != null &&
+            GamePlayController.Instance.playerContain.isRotateContainer)
+        {
+            OnPlayerDragged();
+            return;
+        }
+        
         spawnHandCoroutine = StartCoroutine(SpawnHand());
     }
     
     IEnumerator SpawnHand()
     {
+        if (isDragged) yield break;
+        
         yield return new WaitForSeconds(0.5f);
+        
+        if (isDragged) yield break;
         
         if (handTut == null)
         {

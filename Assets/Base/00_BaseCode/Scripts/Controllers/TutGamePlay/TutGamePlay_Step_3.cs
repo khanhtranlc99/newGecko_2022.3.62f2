@@ -68,12 +68,28 @@ public class TutGamePlay_Step_3 : TutorialBase
     {
         centerPosition = transform.position;
         
+        if (GamePlayController.Instance != null && 
+            GamePlayController.Instance.cameraController != null)
+        {
+            var camCtrl = GamePlayController.Instance.cameraController;
+            
+            if (camCtrl.IsPinching || camCtrl.IsStartingPinch)
+            {
+                OnPlayerZoomed();
+                return;
+            }
+        }
+        
         spawnObjectsCoroutine = StartCoroutine(SpawnObjects());
     }
     
     IEnumerator SpawnObjects()
     {
+        if (isZoomed) yield break;
+        
         yield return new WaitForSeconds(0.5f);
+        
+        if (isZoomed) yield break;
         
         if (handTut == null)
         {
@@ -95,6 +111,8 @@ public class TutGamePlay_Step_3 : TutorialBase
         currentObject1.transform.localScale = Vector3.one;
         
         yield return new WaitForSeconds(delayBetweenObjects);
+        
+        if (isZoomed) yield break;
         
         currentObject2 = Instantiate(handTut, object2StartPos, handTut.transform.rotation);
         currentObject2.SetActive(true);

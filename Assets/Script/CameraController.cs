@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     public float maxZoom = 65f;
 
     public float pinchThreshold = 10f;
-    private bool isPinching = false;
+    [SerializeField] private bool isPinching = false;
     public bool IsPinching => isPinching;
     
     private bool wasPinching = false; // Lưu trạng thái pinch của frame trước
@@ -41,16 +41,14 @@ public class CameraController : MonoBehaviour
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
         TestZoomOnPC();
-        isPinching = false;
 #else
         MobileZoom();
 #endif
     }
     void MobileZoom()
     {
-        wasPinching = isPinching; // Lưu trạng thái trước khi cập nhật
+        wasPinching = isPinching;
         
-        // Cập nhật previousTouchCount sau khi sử dụng
         int currentTouchCount = Input.touchCount;
         
         if (currentTouchCount == 2)
@@ -81,7 +79,6 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            // Nếu vừa kết thúc pinch (từ 2 ngón tay xuống < 2 ngón tay)
             if (isPinching && currentTouchCount < 2)
             {
                 pinchEndTime = Time.time;
@@ -89,19 +86,29 @@ public class CameraController : MonoBehaviour
             isPinching = false;
         }
         
-        previousTouchCount = currentTouchCount; // Cập nhật sau khi xử lý
+        previousTouchCount = currentTouchCount;
     }
     void TestZoomOnPC()
     {
         float scroll = Input.mouseScrollDelta.y;
+        
         if (Mathf.Abs(scroll) > 0.01f)
         {
+            isPinching = true;
             float zoomAmount = scroll * 10f * zoomSpeed;
             cam.fieldOfView = Mathf.Clamp(
                 cam.fieldOfView - zoomAmount,
                 minZoom,
                 maxZoom
             );
+        }
+        else
+        {
+            if (isPinching)
+            {
+                pinchEndTime = Time.time;
+            }
+            isPinching = false;
         }
     }
 }
