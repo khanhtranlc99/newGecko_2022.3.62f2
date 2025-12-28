@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TutorialFunController : MonoBehaviour
 {
-    [SerializeField] protected List<TutorialBase> tutorials;
+    public List<TutorialBase> tutorials;
     protected int currentIDTut;
 
     public virtual void Init()

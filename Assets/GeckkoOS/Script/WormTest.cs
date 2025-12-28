@@ -55,7 +55,7 @@ public class WormTest : MonoBehaviour
         //    splineMesh.RebuildImmediate();
         //}
 
-        bufferFrom = spline.GetPoints(SplineComputer.Space.Local);
+        bufferFrom = spline.GetPoints(SplineComputer.Space.World);
         var tempHead = Instantiate(head);
         tempHead.transform.position = bufferFrom[0].position;
         tempHead.transform.parent = this.transform;

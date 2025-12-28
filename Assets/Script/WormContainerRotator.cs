@@ -126,6 +126,7 @@ public class WormContainerRotator : MonoBehaviour
             {
                 clickedWorm.GetComponent<SplineMesh>().autoUpdate = true;
                 clickedWorm.ActivateWorm();
+                
             }
 
             ExitRotateModeIfNeeded();

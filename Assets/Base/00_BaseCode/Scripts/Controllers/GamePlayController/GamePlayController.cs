@@ -23,10 +23,11 @@ public class GamePlayController : Singleton<GamePlayController>
     public PlayerContain playerContain;
     public GameScene gameScene;
     public CameraController cameraController;
-    
- 
- 
-    
+    public TutGamePlay tutGamePlay;
+
+
+
+
     protected override void OnAwake()
     {
         //  GameController.Instance.currentScene = SceneType.GamePlay;
@@ -41,8 +42,9 @@ public class GamePlayController : Singleton<GamePlayController>
       
       playerContain.Init();
       gameScene.Init();
+        tutGamePlay.Init();
+        tutGamePlay.StartTut();
 
-    
 
 
 
@@ -53,6 +55,11 @@ public class GamePlayController : Singleton<GamePlayController>
         UseProfile.CurrentLevel += 1;
         Initiate.Fade(SceneName.GAME_PLAY, Color.black, 2f);
     }
-    
-
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            next();
+        }
+    }
 }

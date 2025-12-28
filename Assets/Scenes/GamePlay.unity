@@ -228,6 +228,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &262222175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 262222176}
+  - component: {fileID: 262222177}
+  m_Layer: 0
+  m_Name: TutInput_Step_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &262222176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262222175}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2.82}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 341876039}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &262222177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262222175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9e4b5aae2bf10438ea23b92848e164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameTut: TutInput_Step_3
+  typeTut: 0
+  handTut: {fileID: 1664120368824376, guid: 0c6ff12c7b7854244938625fce4dbae9, type: 3}
+  centerPosition: {x: 0, y: 0, z: 0}
+  pinchDistance: 1
+  spreadDistance: 2
+  zoomDuration: 0.5
+  delayBetweenObjects: 0.2
+  diagonalAngle: 45
 --- !u!1 &315179834
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +498,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1438953401}
+  - {fileID: 461926670}
+  - {fileID: 262222176}
   m_Father: {fileID: 2101874396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &407574242
@@ -609,6 +664,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &461926668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 461926670}
+  - component: {fileID: 461926669}
+  m_Layer: 0
+  m_Name: TutInput_Step_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &461926669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461926668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff8c4b04f3334e46b949e1c9b06b782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameTut: TutGamePlay_Step_2
+  typeTut: 0
+  handTut: {fileID: 1664120368824376, guid: 0c6ff12c7b7854244938625fce4dbae9, type: 3}
+  infinityRadius: 1
+  animationDuration: 2
+  centerPosition: {x: 0, y: 0, z: 0}
+--- !u!4 &461926670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461926668}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -4.82, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 341876039}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &471019967
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +748,7 @@ MonoBehaviour:
   playerContain: {fileID: 905268101}
   gameScene: {fileID: 531514266}
   cameraController: {fileID: 330585548}
+  tutGamePlay: {fileID: 2101874397}
 --- !u!4 &471019969
 Transform:
   m_ObjectHideFlags: 0
@@ -1383,6 +1489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1438953401}
+  - component: {fileID: 1438953402}
   m_Layer: 0
   m_Name: TutInput_Step_1
   m_TagString: Untagged
@@ -1405,6 +1512,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 341876039}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1438953402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438953400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9fbd2f3c6251bb42b335bd22f707085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameTut: TutInput_Step_1
+  typeTut: 0
+  handTut: {fileID: 1664120368824376, guid: 0c6ff12c7b7854244938625fce4dbae9, type: 3}
+  targetWorm: {fileID: 0}
+  handOffsetY: -1
+  handOffsetX: -0.2
+  handOffsetZ: 0
+  animationDistance: 0.2
 --- !u!1 &1498310428
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,6 +2175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2101874396}
+  - component: {fileID: 2101874397}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -2071,6 +2199,23 @@ Transform:
   - {fileID: 341876039}
   m_Father: {fileID: 471019969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2101874397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101874395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983a00e30808572418a34e910db24e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorials:
+  - {fileID: 1438953402}
+  - {fileID: 461926669}
+  - {fileID: 262222177}
+  isFirstBirdReady: 0
 --- !u!1 &2105820227
 GameObject:
   m_ObjectHideFlags: 0
