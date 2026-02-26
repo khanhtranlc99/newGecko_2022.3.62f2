@@ -70,6 +70,17 @@ public class GameScene : BaseScene
         //txtNumMove.text = GamePlayController.Instance.playerContain.levelController.levelData.numMove.ToString();
     }
 
+    /// <summary>
+    /// Khôi phục full 3 mạng (sau khi xem quảng cáo revive).
+    /// </summary>
+    public void RestoreFullHearts()
+    {
+        var levelData = GamePlayController.Instance.playerContain.levelController.levelData;
+        levelData.numMove = 3;
+        for (int i = 0; i < imgHeart.Count; i++)
+            imgHeart[i].color = Color.white;
+    }
+
 
     public void HandleCheckWin()
     {

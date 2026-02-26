@@ -1,4 +1,4 @@
-﻿using MoreMountains.NiceVibrations;
+using MoreMountains.NiceVibrations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,7 +56,11 @@ public class HomeScene : BaseScene
             imageStatus.sprite = status[1];
         }
 
-        btnContinue.onClick.AddListener(delegate { GameController.Instance.musicManager.PlayClickSound(); Initiate.Fade(SceneName.GAME_PLAY, Color.black, 2f); });
+        btnContinue.onClick.AddListener(delegate
+        {
+            GameController.Instance.musicManager.PlayClickSound();
+            GameController.Instance.TryShowInterBeforeNextLevel(() => Initiate.Fade(SceneName.GAME_PLAY, Color.black, 2f));
+        });
 
         btnSetting.onClick.AddListener(delegate { GameController.Instance.musicManager.PlayClickSound(); OnSettingClick(); });
 

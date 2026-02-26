@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AppsFlyerSDK;
@@ -16,7 +16,9 @@ public class AppsFlyerManager : MonoBehaviour
                 instance = FindObjectOfType<AppsFlyerManager>();
                 if (!instance)
                 {
-                    instance = Instantiate(Resources.Load<AppsFlyerManager>("AppsFlyerManager"));
+                    var prefab = Resources.Load<AppsFlyerManager>("AppsFlyerManager");
+                    if (prefab != null)
+                        instance = Instantiate(prefab);
                 }
             }
             return instance;

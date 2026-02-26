@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -72,6 +73,7 @@ public class GameController : MonoBehaviour
         musicManager.Init();
         iapController.Init();
         MMVibrationManager.SetHapticsActive(useProfile.OnVibration);
+        if (admobAds != null) admobAds.Init(); // Init Banner, Interstitial, Rewarded (MAX/AdMob)
         startLoading.Init();
         heartGame.Init();
  
@@ -82,6 +84,23 @@ public class GameController : MonoBehaviour
         Initiate.Fade(sceneName.ToString(), Color.black, 2f);
     }
 
+    /// <summary>
+    /// Từ sau level 3, cứ mỗi 2 level (4, 6, 8...) show Interstitial trước khi vào game.
+    /// Gọi khi chuẩn bị Fade sang GAME_PLAY; nếu đúng level thì show inter rồi chạy onDone, không thì chạy onDone luôn.
+    /// </summary>
+    public void TryShowInterBeforeNextLevel(UnityAction onDone)
+    {
+        if (admobAds == null || useProfile.IsRemoveAds)
+        {
+            onDone?.Invoke();
+            return;
+        }
+        int level = UseProfile.CurrentLevel;
+        if (level >= 4 && level % 2 == 0)
+            admobAds.ShowInterstitial(isShowImmediatly: true, actionWatchLog: "InterBeforeLevel", actionIniterClose: onDone);
+        else
+            onDone?.Invoke();
+    }
 
 }
 public enum SceneType

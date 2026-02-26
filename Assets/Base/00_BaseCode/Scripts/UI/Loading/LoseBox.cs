@@ -18,7 +18,7 @@ public class LoseBox : BaseBox
     }
  
     public Button btnRetry;
-    public Button btnAds;
+    public Button btnAdsRevive;
   
 
  
@@ -26,46 +26,43 @@ public class LoseBox : BaseBox
     public void Init()
     {
         btnRetry.onClick.AddListener(delegate { GameController.Instance.musicManager.PlayClickSound(); HandleClose(); });
- 
-     
-       
-   
-       
+        btnAdsRevive.onClick.AddListener(HandleAdsRevive);
     }   
     public void InitState()
     {
         GameController.Instance.AnalyticsController.LoseLevel(UseProfile.CurrentLevel);
     }
-     
-    // public void HandleAdsRevive()
-    // {
-    //     GameController.Instance.musicManager.PlayClickSound();
-    //     GameController.Instance.admobAds.ShowVideoReward(
-    //                 actionReward: () =>
-    //                 {
-                       
-    //                         Close();
-                  
-                  
-    //                 },
-    //                 actionNotLoadedVideo: () =>
-    //                 {
-    //                     GameController.Instance.moneyEffectController.SpawnEffectText_FlyUp_UI
-    //                      (btnAdsRevive.transform
-    //                         ,
-    //                      btnAdsRevive.transform.position,
-    //                      "No video at the moment!",
-    //                      Color.white,
-    //                      isSpawnItemPlayer: true
-    //                      );
-    //                 },
-    //                 actionClose: null,
-    //                 ActionWatchVideo.ReviveFreeLoseBox,
-    //                 UseProfile.CurrentLevel.ToString());
+
+    public void HandleAdsRevive()
+    {
+        GameController.Instance.musicManager.PlayClickSound();
+        GameController.Instance.admobAds.ShowVideoReward(
+                    actionReward: () =>
+                    {
+                        // Tiếp tục chơi với full 3 mạng
+                        GamePlayController.Instance.playerContain.isPopupUp = false;
+                        GamePlayController.Instance.stateGame = StateGame.Playing;
+                        GamePlayController.Instance.gameScene.RestoreFullHearts();
+                        Close();
+                    },
+                    actionNotLoadedVideo: () =>
+                    {
+                        GameController.Instance.moneyEffectController.SpawnEffectText_FlyUp_UI
+                         (btnAdsRevive.transform
+                            ,
+                         btnAdsRevive.transform.position,
+                         "No video at the moment!",
+                         Color.white,
+                         isSpawnItemPlayer: true
+                         );
+                    },
+                    actionClose: null,
+                    ActionWatchVideo.ReviveFreeLoseBox,
+                    UseProfile.CurrentLevel.ToString());
 
 
 
-    // }
+    }
     public void HandleClose()
     {
       //  GameController.Instance.musicManager.PlayClickSound();

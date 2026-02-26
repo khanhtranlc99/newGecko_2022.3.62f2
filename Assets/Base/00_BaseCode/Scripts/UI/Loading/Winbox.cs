@@ -41,10 +41,11 @@ public class Winbox : BaseBox
     private void HandleNext()
     {
         GameController.Instance.musicManager.PlayClickSound();
-       Close();
+        GameController.Instance.TryShowInterBeforeNextLevel(() =>
+        {
+            Close();
             Initiate.Fade(SceneName.GAME_PLAY, Color.black, 2f);
-     
-       
+        });
     }
     private void HandleReward()
     {
