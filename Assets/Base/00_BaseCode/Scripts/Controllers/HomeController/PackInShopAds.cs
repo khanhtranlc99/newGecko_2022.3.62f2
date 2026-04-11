@@ -121,7 +121,7 @@ public class PackInShopAds : PackInShop
         }
         GameController.Instance.musicManager.PlayClickSound();
 
-        GameController.Instance.admobAds.ShowVideoReward(
+        GameController.Instance.admobAds.ShowRewardedAd(
                 actionReward: () =>
                 {
 
@@ -142,9 +142,8 @@ public class PackInShopAds : PackInShop
                      isSpawnItemPlayer: true
                      );
                 },
-                actionClose: null,
-                actionWatchVideo,
-                UseProfile.CurrentLevel.ToString());
+             
+                actionWatchVideo );
     }
       
 

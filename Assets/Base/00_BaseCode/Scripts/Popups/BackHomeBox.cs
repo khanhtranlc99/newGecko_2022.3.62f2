@@ -82,7 +82,7 @@ public class BackHomeBox : BaseBox
         GameController.Instance.musicManager.PlayClickSound();
         if (UseProfile.Heart > 0)
         {
-            GameController.Instance.admobAds.ShowInterstitial(false, actionIniterClose: () => { Next(); }, actionWatchLog: "ResetSceneAtLoseBox");
+            GameController.Instance.admobAds.ShowInterstitialAd( actionIniterClose: () => { Next(); } );
             void Next()
             {
            
@@ -104,7 +104,7 @@ public class BackHomeBox : BaseBox
     private void BackHome()
     {
         GameController.Instance.musicManager.PlayClickSound();
-        GameController.Instance.admobAds.ShowInterstitial(false, actionIniterClose: () => { Next(); }, actionWatchLog: "BackHomeLoseBox");
+        GameController.Instance.admobAds.ShowInterstitialAd(actionIniterClose: () => { Next(); });
         void Next()
         {
          

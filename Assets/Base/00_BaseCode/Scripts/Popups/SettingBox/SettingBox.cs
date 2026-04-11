@@ -170,7 +170,7 @@ public class SettingBox : BaseBox
     {
         if(SceneName.GAME_PLAY == SceneManager.GetActiveScene().name)
             GamePlayController.Instance.playerContain.isPopupUp = false;
-        GameController.Instance.admobAds.ShowInterstitial(false, actionIniterClose: () => { Next(); }, actionWatchLog: "BtnBackHomeSettingBox");
+        GameController.Instance.admobAds.ShowInterstitialAd(  actionIniterClose: () => { Next(); } );
 
         void Next()
         {
@@ -186,7 +186,7 @@ public class SettingBox : BaseBox
     public void HandleBtnHome()
     {
 
-        GameController.Instance.admobAds.ShowInterstitial(false, actionIniterClose: () => { Next(); }, actionWatchLog: "BtnBackHomeSettingBox");
+        GameController.Instance.admobAds.ShowInterstitialAd(actionIniterClose: () => { Next(); });
 
         void Next()
         {

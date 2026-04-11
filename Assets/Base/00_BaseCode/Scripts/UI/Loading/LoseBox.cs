@@ -36,7 +36,7 @@ public class LoseBox : BaseBox
     public void HandleAdsRevive()
     {
         GameController.Instance.musicManager.PlayClickSound();
-        GameController.Instance.admobAds.ShowVideoReward(
+        GameController.Instance.admobAds.ShowRewardedAd(
                     actionReward: () =>
                     {
                         // Tiếp tục chơi với full 3 mạng
@@ -56,9 +56,8 @@ public class LoseBox : BaseBox
                          isSpawnItemPlayer: true
                          );
                     },
-                    actionClose: null,
-                    ActionWatchVideo.ReviveFreeLoseBox,
-                    UseProfile.CurrentLevel.ToString());
+                  
+                    ActionWatchVideo.ReviveFreeLoseBox );
 
 
 

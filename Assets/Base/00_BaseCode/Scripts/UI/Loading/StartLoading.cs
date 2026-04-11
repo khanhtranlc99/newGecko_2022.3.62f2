@@ -35,7 +35,7 @@ public class StartLoading : MonoBehaviour
         {
             name = SceneName.HOME_SCENE;
         }
-        name = SceneName.HOME_SCENE;
+     name = SceneName.GAME_PLAY;
         var _asyncOperation = SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
        
         while (!_asyncOperation.isDone)
@@ -50,14 +50,7 @@ public class StartLoading : MonoBehaviour
     private IEnumerator LoadAdsToChangeScene()
     {
         yield return new WaitForSeconds(2f);
-        if (UseProfile.CurrentLevel == 1)
-        {
-            name = SceneName.GAME_PLAY;
-        }
-        else
-        {
-            name = SceneName.HOME_SCENE;
-        }
+        name = SceneName.GAME_PLAY;
         Initiate.Fade(name, Color.black, 2f);
 
     }

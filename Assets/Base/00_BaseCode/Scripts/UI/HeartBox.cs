@@ -68,7 +68,7 @@ public class HeartBox : BaseBox
     public void ClickByAdsHeart()
     {
         GameController.Instance.musicManager.PlayClickSound();
-        GameController.Instance.admobAds.ShowVideoReward(
+        GameController.Instance.admobAds.ShowRewardedAd(
                      actionReward: () =>
                      {
                          
@@ -97,9 +97,8 @@ public class HeartBox : BaseBox
                           isSpawnItemPlayer: true
                           );
                      },
-                     actionClose: null,
-                     ActionWatchVideo.HeartInHearPopup,
-                     UseProfile.CurrentLevel.ToString());
+                    
+                     ActionWatchVideo.HeartInHearPopup );
     }
     private void OnclickBtnBuy()
     {

@@ -91,7 +91,7 @@ public class BoosterHint : MonoBehaviour
         }
         else
         {
-         GameController.Instance.admobAds.ShowVideoReward(
+         GameController.Instance.admobAds.ShowRewardedAd(
                      actionReward: () =>
                      {
                          UseProfile.Hint_Booster += 3;                        
@@ -110,9 +110,9 @@ public class BoosterHint : MonoBehaviour
                           isSpawnItemPlayer: true
                           );
                      },
-                     actionClose: null,
-                       ActionWatchVideo.Hint,
-                     UseProfile.CurrentLevel.ToString());
+               
+                       ActionWatchVideo.Hint 
+                    );
         }
 
 

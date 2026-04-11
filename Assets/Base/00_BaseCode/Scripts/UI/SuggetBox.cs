@@ -108,7 +108,7 @@ public class SuggetBox : BaseBox
     {
 
         GameController.Instance.musicManager.PlayClickSound();
-        GameController.Instance.admobAds.ShowVideoReward(
+        GameController.Instance.admobAds.ShowRewardedAd(
                      actionReward: () =>
                      {
                          switch (currentGift)
@@ -151,9 +151,8 @@ public class SuggetBox : BaseBox
                           isSpawnItemPlayer: true
                           );
                      },
-                     actionClose: null,
-                     actionWatchVideo,
-                     UseProfile.CurrentLevel.ToString());
+                  
+                     actionWatchVideo );
     }   
     
     public void HandlePayByCoin()

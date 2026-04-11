@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
     public UseProfile useProfile;
     public DataContain dataContain;
     public MusicManagerGameBase musicManager;
-    public AdmobAds admobAds;
+    public AdmobAdsGoogle admobAds;
 
     public AnalyticsController AnalyticsController;
     public IapController iapController;
@@ -73,7 +73,7 @@ public class GameController : MonoBehaviour
         musicManager.Init();
         iapController.Init();
         MMVibrationManager.SetHapticsActive(useProfile.OnVibration);
-        if (admobAds != null) admobAds.Init(); // Init Banner, Interstitial, Rewarded (MAX/AdMob)
+        admobAds.Init();
         startLoading.Init();
         heartGame.Init();
  
@@ -95,11 +95,9 @@ public class GameController : MonoBehaviour
             onDone?.Invoke();
             return;
         }
-        int level = UseProfile.CurrentLevel;
-        if (level >= 4 && level % 2 == 0)
-            admobAds.ShowInterstitial(isShowImmediatly: true, actionWatchLog: "InterBeforeLevel", actionIniterClose: onDone);
-        else
-            onDone?.Invoke();
+      
+            admobAds.ShowInterstitialAd(  delegate { onDone?.Invoke(); });
+      
     }
 
 }
