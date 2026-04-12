@@ -17,7 +17,7 @@ public class StartLoading : MonoBehaviour
         wasCoolDown = true;
         progressBar.fillAmount = 0f;
         countSecond = 0;
-        coroutineLoad = StartCoroutine(LoadAdsToChangeScene());
+        coroutineLoad = StartCoroutine(ChangeScene());
         StartCoroutine(LoadingText());
     }
 
