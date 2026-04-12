@@ -9,10 +9,10 @@ using System.Threading;
 
 public class AdmobAdsGoogle : MonoBehaviour
 {
-    private const string AppID = "ca-app-pub-1848319716441980~1498427537";
-    private const string InterstitialAdUnitId = "ca-app-pub-1848319716441980/7609733250";
-    private const string RewardedAdUnitId = "ca-app-pub-1848319716441980/6359542408";
-    private const string BanerAdUnitId = "ca-app-pub-1848319716441980/9548307943";
+    private const string AppID = "ca-app-pub-9232357750995789~2671074254";
+    private const string InterstitialAdUnitId = "ca-app-pub-9232357750995789/2463695276";
+    private const string RewardedAdUnitId = "ca-app-pub-9232357750995789/1494916891";
+    private const string BanerAdUnitId = "ca-app-pub-9232357750995789/7022575745";
     private const string AppOpenId = "ca-app-pub-1848319716441980/9356736256";
  
  

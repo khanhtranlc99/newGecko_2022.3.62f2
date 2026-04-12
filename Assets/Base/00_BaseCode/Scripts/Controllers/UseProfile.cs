@@ -299,7 +299,7 @@ public class UseProfile : MonoBehaviour
     {
         get
         {
-            return PlayerPrefs.GetInt(StringHelper.TNT_BOOSTER, 100);
+            return PlayerPrefs.GetInt(StringHelper.TNT_BOOSTER, 3);
         }
         set
         {

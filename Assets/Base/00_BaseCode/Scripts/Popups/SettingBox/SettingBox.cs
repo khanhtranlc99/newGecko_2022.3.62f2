@@ -33,24 +33,19 @@ public class SettingBox : BaseBox
     [SerializeField] private Button btnSound;
     [SerializeField] private Button btnHome;
 
-    public RectTransform objMusic;
-    public RectTransform objVibra;
-    public RectTransform objSound;
-    public Image imgMusic;
-    public Image imgVibration;
-    public Image imgSound;
+    public GameObject activeMusic;
+    public GameObject activeVibration;
+    public GameObject activeSound;
 
-    public Sprite spriteOn;
-    public Sprite spriteOff;
+    public GameObject unactiveMusic;
+    public GameObject unactiveVibration;
+    public GameObject unactiveSound;
 
- 
-  
-   // public Button btnRestart;
+
+
+    // public Button btnRestart;
 
     public bool isGameplay;
-
-    public Vector3 postOn = new Vector3(90, -36, 0);
-    public Vector3 postOff = new Vector3(35, -36, 0);
 
     #endregion
     private void Init()
@@ -90,35 +85,35 @@ public class SettingBox : BaseBox
     {
         if (GameController.Instance.useProfile.OnVibration)
         {
-            imgVibration.sprite = spriteOn;
-            objVibra.anchoredPosition = postOn;
+            activeVibration.SetActive(true);
+            unactiveVibration.SetActive(false);
         }
         else
         {
-            imgVibration.sprite = spriteOff;
-            objVibra.anchoredPosition = postOff;
+            activeVibration.SetActive(false);
+            unactiveVibration.SetActive(true);
         }
 
         if (GameController.Instance.useProfile.OnMusic)
         {
-            imgMusic.sprite = spriteOn;
-            objMusic.anchoredPosition = postOn;
+            activeMusic.SetActive(true);
+            unactiveMusic.SetActive(false);
         }
         else
         {
-            imgMusic.sprite = spriteOff;
-            objMusic.anchoredPosition = postOff;
+            activeMusic.SetActive(false);
+            unactiveMusic.SetActive(true);
         }
 
         if (GameController.Instance.useProfile.OnSound)
         {
-            objSound.anchoredPosition = postOn;
-            imgSound.sprite = spriteOn;
+            activeSound.SetActive(true);
+            unactiveSound.SetActive(false);
         }
         else
         {
-            objSound.anchoredPosition = postOff;
-            imgSound.sprite = spriteOff;
+            activeSound.SetActive(false);
+            unactiveSound.SetActive(true);
         }
       
     }

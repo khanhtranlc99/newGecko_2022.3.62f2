@@ -53,6 +53,12 @@
         "com.google.firebase.app": "13.1.0"
       }
     },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "2.10.2",
       "depth": 0,

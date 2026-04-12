@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +20,7 @@ public class BoosterHint : MonoBehaviour
 
     public HandHint currentHandHint;
 
-
+   
 
 
     public void Init()
@@ -117,7 +117,7 @@ public class BoosterHint : MonoBehaviour
 
 
     }
-
+    
     public void HandlteTut()
     {
         wasUseHint_Booster = true;

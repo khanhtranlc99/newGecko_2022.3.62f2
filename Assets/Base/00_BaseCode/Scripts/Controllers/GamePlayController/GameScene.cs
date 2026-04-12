@@ -9,15 +9,16 @@ using TMPro;
 public class GameScene : BaseScene
 {
     public List<Image> imgHeart;
-
+    public Sprite activeHeart;
+    public Sprite unactiveHeart;
     public TMP_Text txtLevel;
    
     public void Init(   )
     {
         txtLevel.text = "Level " + UseProfile.CurrentLevel;
-        for(int i = 0; i <= imgHeart.Count; i++)
+        for(int i = 0; i < imgHeart.Count; i++)
         {
-            imgHeart[0].color = Color.white;
+            imgHeart[i].sprite = activeHeart;
         }
     }
 
@@ -41,7 +42,7 @@ public class GameScene : BaseScene
 
         //}
         GamePlayController.Instance.playerContain.levelController.levelData.numMove--;
-        imgHeart[GamePlayController.Instance.playerContain.levelController.levelData.numMove].color = new Color(0.5f, 0.5f, 0.5f);
+        imgHeart[GamePlayController.Instance.playerContain.levelController.levelData.numMove].sprite = unactiveHeart;
         if (GamePlayController.Instance.playerContain.levelController.levelData.numMove <= 0)
         {
             if (GamePlayController.Instance.playerContain.levelController.levelData.lsWormsInGame.Count > 0)
@@ -78,7 +79,7 @@ public class GameScene : BaseScene
         var levelData = GamePlayController.Instance.playerContain.levelController.levelData;
         levelData.numMove = 3;
         for (int i = 0; i < imgHeart.Count; i++)
-            imgHeart[i].color = Color.white;
+            imgHeart[i].sprite = activeHeart;
     }
 
 
