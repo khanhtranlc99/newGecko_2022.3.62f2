@@ -147252,7 +147252,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4836346172873190252}
   - component: {fileID: 7514274165724632183}
-  - component: {fileID: 3097499857858817997}
   - component: {fileID: 3971032379530891408}
   m_Layer: 0
   m_Name: Level_115
@@ -147571,24 +147570,6 @@ MonoBehaviour:
   restoreBatchPerFrame: 25
   tapTimeThreshold: 0.25
   tapDistanceThreshold: 10
---- !u!114 &3097499857858817997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7754056556115814524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af3faeee9f51ae44284412ea277fc9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numMove: 3
-  lsWorms: []
-  lsWormsInGame: []
-  prefabWorm: {fileID: 2949387133050088862, guid: 613fad4d37ccea741b90e869e7dd2e89, type: 3}
-  wormNamePrefix: Worm_
-  prefabName: WormPrefab
 --- !u!114 &3971032379530891408
 MonoBehaviour:
   m_ObjectHideFlags: 0

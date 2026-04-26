@@ -23272,7 +23272,6 @@ MonoBehaviour:
   lsWorms:
   - {fileID: 376811108867839891}
   lsWormsInGame:
-  - {fileID: 0}
   - {fileID: 3434929585370761643}
   - {fileID: 5871925620579479792}
   - {fileID: 1696515849966354542}
